@@ -9,15 +9,18 @@
  */
 
 #include <Arduino.h>
+
 #include <PTITCube.h>
+
+PTIT_CDH cdh;
 
 PTIT_Sensor mySensor;
 
 void setup() {
-    Serial.begin(115200);
-    while (!Serial) { delay(10); }
+    cdh.begin(115200);
+    while (!cdh) { delay(10); }
 
-    Serial.println("\n[EXAMPLE] Bắt đầu bài test Cảm biến Quán tính 9 trục (IMU)...");
+    cdh.println("\n[EXAMPLE] Bắt đầu bài test Cảm biến Quán tính 9 trục (IMU)...");
     mySensor.init(false, true, true);
 }
 
@@ -47,28 +50,27 @@ void loop() {
         float heading = atan2(my, mx) * 180.0 / PI;
         if (heading < 0) heading += 360.0;
 
-        Serial.println("==================================================");
-        
+                
         // 1. Dữ liệu Gia tốc (m/s^2)
-        Serial.println(">>> GIA TỐC (ACCELEROMETER) <<<");
-        Serial.printf("  X: %6.2f m/s^2 | Y: %6.2f m/s^2 | Z: %6.2f m/s^2\n", 
+        cdh.println(">>> GIA TỐC (ACCELEROMETER) <<<");
+        cdh.printf("  X: %6.2f m/s^2 | Y: %6.2f m/s^2 | Z: %6.2f m/s^2\n", 
                       ax, ay, az);
 
         // 2. Dữ liệu Vận tốc góc (rad/s)
-        Serial.println(">>> CON QUAY HỒI CHUYỂN (GYROSCOPE) <<<");
-        Serial.printf("  X: %6.2f rad/s | Y: %6.2f rad/s | Z: %6.2f rad/s\n", 
+        cdh.println(">>> CON QUAY HỒI CHUYỂN (GYROSCOPE) <<<");
+        cdh.printf("  X: %6.2f rad/s | Y: %6.2f rad/s | Z: %6.2f rad/s\n", 
                       gx, gy, gz);
 
         // 3. Góc nghiêng (Tilt Angle)
-        Serial.println(">>> GÓC NGHIÊNG (TILT ANGLE) <<<");
-        Serial.printf("  Roll (Lắc ngang)  : %6.2f° | Pitch (Chúc/Ngóc) : %6.2f°\n", 
+        cdh.println(">>> GÓC NGHIÊNG (TILT ANGLE) <<<");
+        cdh.printf("  Roll (Lắc ngang)  : %6.2f° | Pitch (Chúc/Ngóc) : %6.2f°\n", 
                       roll, pitch);
 
         // 4. Dữ liệu Từ trường (uT) & La bàn (Heading)
-        Serial.println(">>> LA BÀN TỪ TRƯỜNG (MAGNETOMETER) <<<");
-        Serial.printf("  X: %6.2f uT    | Y: %6.2f uT    | Z: %6.2f uT    | Heading: %6.2f°\n", 
+        cdh.println(">>> LA BÀN TỪ TRƯỜNG (MAGNETOMETER) <<<");
+        cdh.printf("  X: %6.2f uT    | Y: %6.2f uT    | Z: %6.2f uT    | Heading: %6.2f°\n", 
                       mx, my, mz, heading);
         
-        Serial.println("==================================================\n");
+        cdh.println("==================================================\n");
     }
 }
