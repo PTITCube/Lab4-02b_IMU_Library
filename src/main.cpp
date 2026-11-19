@@ -19,6 +19,10 @@ void loop() {
     float ay = sensor.getAccY();
     float az = sensor.getAccZ();
 
+    float gx = sensor.getGyroX();
+    float gy = sensor.getGyroY();
+    float gz = sensor.getGyroZ();
+
     float mx = sensor.getMagX();
     float my = sensor.getMagY();
     float mz = sensor.getMagZ();
