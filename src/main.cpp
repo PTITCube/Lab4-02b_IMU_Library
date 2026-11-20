@@ -5,10 +5,15 @@
 #include <PTITCube.h>
 
 PTIT_CDH cdh;
+PTIT_EPS eps;
 PTIT_Sensor sensor;
 
 void setup() {
     cdh.begin(115200);
+
+    // Kích hoạt hạ áp nuôi cảm biến qua thư viện EPS
+    eps.setBuckState(true);
+
     sensor.init(false, true, true); // Bật MPU6500 và QMC5883P
 }
 
