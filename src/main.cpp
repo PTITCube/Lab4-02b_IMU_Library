@@ -36,7 +36,11 @@ void loop() {
     float roll    = sensor.getRoll();
     float pitch   = sensor.getPitch();
 
-    cdh.printf("IMU: Roll: %5.1f, Pitch: %5.1f | Head: %5.1f | Acc: (%.2f, %.2f, %.2f)\n", roll, pitch, heading, ax, ay, az);
+    // In 4 dòng viễn trắc chi tiết: Vận tốc góc, Gia tốc, Từ trường, Các góc Euler
+    cdh.printf("Góc nghiêng: X: %6.2f, Y: %6.2f, Z: %6.2f rad/s\n", gx, gy, gz);
+    cdh.printf("Gia tốc:     X: %6.2f, Y: %6.2f, Z: %6.2f m/s2\n", ax, ay, az);
+    cdh.printf("Từ trường:   X: %6.2f, Y: %6.2f, Z: %6.2f uT\n", mx, my, mz);
+    cdh.printf("Roll: %5.1f, Pitch: %5.1f, Head: %5.1f\n", roll, pitch, heading);
 
     delay(2000);
 }
